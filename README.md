@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Naksh ❤️ Samridhi</title>
+<style>
+body{
+margin:0;font-family:'Segoe UI',sans-serif;
+background:linear-gradient(120deg,#ff416c,#ff4b2b);
+color:white;text-align:center;
+overflow-x:hidden;
+}
+.screen{display:none;min-height:100vh;padding:60px 20px;}
+.active{display:block;}
+.card{
+background:rgba(255,255,255,0.2);
+padding:25px;border-radius:25px;
+max-width:520px;margin:auto;
+box-shadow:0 10px 35px rgba(0,0,0,0.4);
+}
+img{width:100%;border-radius:20px;margin-top:10px;}
+button{
+padding:12px 24px;border:none;border-radius:30px;
+background:#fff;color:#ff3366;font-size:16px;
+cursor:pointer;margin:6px;
+}
+.heart{
+position:fixed;bottom:-20px;font-size:24px;
+animation:float 6s linear infinite;
+}
+@keyframes float{from{transform:translateY(0);}to{transform:translateY(-120vh);}}
+canvas{position:fixed;top:0;left:0;pointer-events:none;}
+</style>
+</head>
+<body>
+
+<audio autoplay loop src="song.mp3"></audio>
+<canvas id="confetti"></canvas>
+
+<!-- Home -->
+<div id="s1" class="screen active">
+<div class="card">
+<h1>💖 Naksh & Samridhi 💖</h1>
+<p>Dance partners • Annoying • Funny • Forever 🕺💃</p>
+<button onclick="go(2)">Start Our Love Journey 💌</button>
+</div>
+</div>
+
+<!-- Story -->
+<div id="s2" class="screen">
+<div class="card">
+<h2>📖 Our Story</h2>
+<p>Samridhi… 🥰 the day you entered my life, everything became brighter ❤️  
+Every dance, every laugh, every silly fight, I love it all 😏💖  
+From the first time we danced together, I knew you were special.  
+We became best friends, partners in crime, annoying each other, laughing endlessly, and creating our own crazy little world 💞</p>
+<button onclick="go(3)">Next 💫</button>
+</div>
+</div>
+
+<!-- Letters -->
+<div id="s3" class="screen">
+<div class="card">
+<h2>💌 Love Letters 🥰</h2>
+<p id="letterBox" style="text-align:left;"></p>
+<button onclick="nextLetter()">Next Letter 💖</button>
+<button onclick="go(4)">Go to Gallery 📸</button>
+</div>
+</div>
+
+<!-- Gallery -->
+<div id="s4" class="screen">
+<div class="card">
+<h2>📸 Our Memories 🥰</h2>
+<img src="Snapchat-14081490.jpg">
+<img src="Snapchat-1527682850.jpg">
+<img src="Snapchat-1603898133.jpg">
+<img src="Snapchat-1983733540.jpg">
+<img src="Snapchat-509499410.jpg">
+<img src="Snapchat-986324046.jpg">
+<img src="Snapchat-98778515.jpg">
+<button onclick="go(5)">Play Games 🎮</button>
+</div>
+</div>
+
+<!-- Games -->
+<div id="s5" class="screen">
+<div class="card">
+<h2>🎮 Fun Love Games 🥰</h2>
+<p>Click the answers and see what happens 😏💖</p>
+
+<p>1️⃣ Who loves more?</p>
+<button onclick="alert('Correct 😍 Naksh loves you more bubu 💖')">Naksh</button>
+<button onclick="alert('Haha 😝 Close enough!')">Samridhi</button>
+
+<p>2️⃣ Best nickname for Samridhi?</p>
+<button onclick="alert('Yesss 🥰 You are my BUBU 💖')">Bubu</button>
+<button onclick="alert('Cute! But not as cute as Bubu 😏')">Laadooo</button>
+
+<p>3️⃣ Who is the better dance partner?</p>
+<button onclick="alert('Of course 🕺💃 you & me together forever!')">Naksh & Samridhi</button>
+<button onclick="alert('Hmm not bad 😝')">Just Samridhi</button>
+
+<p>4️⃣ Who is more annoying?</p>
+<button onclick="alert('😏 Naksh! But you love me anyway 💖')">Naksh</button>
+<button onclick="alert('😂 You are funny too!')">Samridhi</button>
+
+<p>5️⃣ Who hugs better?</p>
+<button onclick="alert('🥰 Samridhi hugs the best!')">Samridhi</button>
+<button onclick="alert('Not as warm 😝')">Naksh</button>
+
+<p>6️⃣ Who misses more?</p>
+<button onclick="alert('🥺 Naksh misses you like crazy bubu 💖')">Naksh</button>
+<button onclick="alert('Haha 😝 maybe you too!')">Samridhi</button>
+
+<p>7️⃣ Who is more dramatic?</p>
+<button onclick="alert('🎭 Naksh drama king 😏')">Naksh</button>
+<button onclick="alert('😂 Samridhi diva!')">Samridhi</button>
+
+<p>8️⃣ Soulmate check?</p>
+<button onclick="alert('💑 Definitely us forever!')">Confirm</button>
+
+<p>9️⃣ Funny dare?</p>
+<button onclick="alert('😘 Send Naksh a kiss bubu!')">Do it</button>
+
+<p>🔟 Final love test?</p>
+<button onclick="alert('💖 You unlocked my heart Samridhi!')">Unlock</button>
+
+<button onclick="go(6)">Go to Final Surprise 💍</button>
+</div>
+</div>
+
+<!-- Proposal -->
+<div id="s6" class="screen">
+<div class="card">
+<h2>💍 Final Question</h2>
+<p>Samridhi… will you be my Valentine forever? 💖</p>
+<button onclick="yes()">YES 😍</button>
+<button onclick="no()">NO 😏</button>
+<p id="ans"></p>
+</div>
+</div>
+
+<script>
+// Navigation
+function go(n){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('s'+n).classList.add('active');
+}
+
+// Floating hearts
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},300);
+
+// Letters in paragraph form
+let letters=[
+"🥰 I love you so muchhh bubu ❤️ You’re my Parvati, my Radha ji, my world 😌💖🌸 Every day with you is magical, and your smile lights up my soul. I love our silly fights, our crazy dance moves, and our endless laughter. You are my happiness, my peace, my madness, my everything 💞",
+"Bubu you’re my hippopotamus 🦛 and my kutti 😝💕 I love every little quirk, every giggle, every moment we share. My heart beats for you every second, Samridhi 😍💖💐",
+"You’re my kamini, my bhudhii, my kuchuu puchuu 😏🐻 I can’t imagine life without your cute smile and the way you annoy me sometimes 😌💕",
+"My goliiii, my laadooo, my samuuuuu 😍💖💐 You are my forever dance partner, my best friend, and my safe place ❤️",
+"You are my madness and my peace 💖🌸 With you, even boring days feel magical, and every moment is unforgettable 🥰",
+"My dance partner in every life 🕺💃💞 I choose you again and again 💍 You are my heart, my love, my bubu 💖",
+"I choose you again and again 💍💖 You are my home, my comfort, my happiness, and my everything 🌸",
+"You are my home 🏠💕 Every hug, every smile, every look from you makes me fall deeper in love 😍💖",
+"My favorite person forever 🥺💖🌸 I cherish every moment with you, Samridhi. You make life beautiful 🐻💕",
+"I love you endlessly Samridhi ❤️🐻💖 You are my best friend, my partner, my love, my bubu, my everything 🥰💞"
+];
+let l=0;
+function nextLetter(){
+if(l<letters.length){letterBox.innerHTML=letters[l++];}
+}
+
+// Proposal
+function yes(){
+ans.innerHTML="YAY 😍 You’re mine forever Samridhi 💍❤️🥰";
+startConfetti();
+}
+function no(){
+ans.innerHTML="Too late 😏 Destiny already chose us ❤️";
+}
+
+// Confetti
+let canvas=document.getElementById('confetti');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+let ctx=canvas.getContext('2d');
+let confettis=[];
+function startConfetti(){
+for(let i=0;i<200;i++){
+confettis.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*6+4,
+dx:(Math.random()-0.5)*3,
+dy:Math.random()*5+2,
+color:`hsl(${Math.random()*360},100%,70%)`
+});
+}
+requestAnimationFrame(drawConfetti);
+}
+function drawConfetti(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+confettis.forEach(c=>{
+ctx.beginPath();
+ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
+ctx.fillStyle=c.color;ctx.fill();
+c.x+=c.dx;c.y+=c.dy;
+if(c.y>canvas.height)c.y=0;c.x%=canvas.width;
+});
+requestAnimationFrame(drawConfetti);
+}
+</script>
+
+</body>
+</html>
